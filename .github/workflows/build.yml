@@ -233,7 +233,7 @@ jobs:
       - name: Install Android emulator
         run: |
           wget -O emulator.zip \
-            https://dl.google.com/android/repository/emulator-darwin_x64-7140946.zip
+            https://dl.google.com/android/repository/emulator-darwin_x64-9310560.zip
           unzip emulator.zip
 
       - name: Install system dependencies
