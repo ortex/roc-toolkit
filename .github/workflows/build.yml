@@ -25,6 +25,7 @@ concurrency:
 jobs:
 
   linux-x86_64:
+    if: false
     runs-on: ubuntu-latest
 
     strategy:
@@ -76,6 +77,7 @@ jobs:
           scripts/ci_checks/docker.sh ${{ matrix.image }} scripts/ci_checks/${{ matrix.script }}.sh
 
   linux-arm:
+    if: false
     runs-on: ubuntu-latest
 
     strategy:
@@ -106,6 +108,7 @@ jobs:
           scripts/ci_checks/docker.sh ${{ matrix.image }} scripts/ci_checks/${{ matrix.script }}.sh
 
   linux-checks:
+    if: false
     runs-on: ubuntu-latest
 
     strategy:
@@ -145,6 +148,7 @@ jobs:
           scripts/ci_checks/docker.sh ${{ matrix.image }} scripts/ci_checks/${{ matrix.script }}.sh
 
   android-linux:
+    if: false
     strategy:
       fail-fast: false
       matrix:
@@ -222,6 +226,10 @@ jobs:
             system-images;android-${{ matrix.api }};${{ matrix.avd_tgt }};${{ matrix.avd_abi }}
             emulator
 
+      - name: List Android components
+        run: |
+          /Users/runner/Library/Android/sdk/tools/bin/sdkmanager --list
+
       - name: Install Android emulator
         run: |
           wget -O emulator.zip \
@@ -237,6 +245,7 @@ jobs:
           scripts/ci_checks/android/macos_build.sh
 
   macos:
+    if: false
     strategy:
       fail-fast: false
       matrix:
