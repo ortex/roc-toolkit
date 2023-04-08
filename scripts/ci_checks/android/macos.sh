@@ -63,11 +63,13 @@ if [[ "${action}" == "--test" ]]; then
     mkdir -p "tests/${host}${CI_API}"
     log_lines=800
 
+    adb shell "ip a"
     # add route for multicast traffic
     nifaces=( $(adb shell "ip a" | grep 'state UP' | cut -d: -f2 | awk '{print $1}') )
     for niface in "${nifaces[@]}"; do
         adb shell "su 0 ip route add 224.0.0.0/4 dev ${niface} table local" || continue
     done
+    adb shell "ip a"
 
     # FIXME:
     #  https://github.com/roc-streaming/roc-toolkit/issues/435
@@ -76,7 +78,6 @@ if [[ "${action}" == "--test" ]]; then
     tests=( $(find "bin/${host}${CI_API}" -name 'roc-test-*' \
                    -not -name 'roc-test-address' \
                    -not -name 'roc-test-ctl' \
-#                   -not -name 'roc-test-netio' \
                    -not -name 'roc-test-public-api') )
 
     for t in "${tests[@]}"; do
